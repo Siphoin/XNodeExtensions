@@ -10,9 +10,10 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 {
     public abstract class BaseGraph : NodeGraph
     {
-        public bool IsPaused { get; private set; }
 
         private NodeQueue _queue;
+
+        private IEnumerable<VaritableNode> _varitablesNodes;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -20,12 +21,16 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public event Action<BaseNode> OnNextNode;
 
+        public bool IsPaused { get; private set; }
+        public IEnumerable<VaritableNode> VaritablesNodes => _varitablesNodes;
+
         public void Execute ()
         {
             var queue = new List<BaseNodeInteraction>();
 
             _cancellationTokenSource = new CancellationTokenSource();
 
+            BuidVaritableNodes();
 
             for (int i = 0; nodes.Count > i; i++)
             {
@@ -41,6 +46,43 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
             ExecuteProcess().Forget();
 
+        }
+
+        private void BuidVaritableNodes()
+        {
+            if (_varitablesNodes is null)
+            {
+                List<VaritableNode> nodes = new List<VaritableNode>();
+
+                foreach (var node in this.nodes)
+                {
+                    if (node is VaritableNode)
+                    {
+                        nodes.Add(node as VaritableNode);
+                    }
+                }
+
+                _varitablesNodes = nodes;
+            }
+        }
+
+        public T GetValueFromVaritable<T>(string name)
+        {
+            var node = _varitablesNodes.SingleOrDefault(n => n.Name == name);
+
+            if (node is null)
+            {
+                throw new NullReferenceException($"Varitable Node with name not found");
+            }
+
+            var value = node.GetCurrentValue();
+
+            if (value.GetType() != typeof(T))
+            {
+                throw new InvalidCastException($"varitable node {node.Name} have type {value.GetType()}. Argument type {typeof(T)}");
+            }
+
+            return (T)value;
         }
 
         public void Continue ()
