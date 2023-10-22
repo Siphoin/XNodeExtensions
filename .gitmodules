@@ -1,0 +1,6 @@
+[submodule "xNode"]
+	path = xNode
+	url = https://github.com/Siccity/xNode.git
+[submodule "UniTask"]
+	path = UniTask
+	url = https://github.com/Cysharp/UniTask.git
