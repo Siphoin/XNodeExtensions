@@ -13,7 +13,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         private NodeQueue _queue;
 
-        private IEnumerable<VaritableNode> _varitablesNodes;
+        private IDictionary<string, VaritableNode> _varitables;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -22,7 +22,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public event Action<BaseNode> OnNextNode;
 
         public bool IsPaused { get; private set; }
-        public IEnumerable<VaritableNode> VaritablesNodes => _varitablesNodes;
+        public IEnumerable<VaritableNode> Varitables => _varitables;
 
         public void Execute ()
         {
@@ -50,25 +50,26 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         private void BuidVaritableNodes()
         {
-            if (_varitablesNodes is null)
+            if (_varitables is null)
             {
-                List<VaritableNode> nodes = new List<VaritableNode>();
+                Dictionary<string, VaritableNode> nodes = new Dictionary<string, VaritableNode>;
 
                 foreach (var node in this.nodes)
                 {
                     if (node is VaritableNode)
                     {
-                        nodes.Add(node as VaritableNode);
+                        VaritableNode varitableNode = node as VaritableNode;
+                        nodes.Add(varitableNode.Name, varitableNode);
                     }
                 }
 
-                _varitablesNodes = nodes;
+                _varitables = nodes;
             }
         }
 
         public T GetValueFromVaritable<T>(string name)
         {
-            var node = _varitablesNodes.SingleOrDefault(n => n.Name == name);
+            var node = _varitables[name];
 
             if (node is null)
             {
