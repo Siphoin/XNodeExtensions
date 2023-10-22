@@ -14,13 +14,13 @@ namespace SiphoinUnityHelpers.XNodeExtensions
     [NodeWidth(230)]
     public abstract class BaseNode : Node
     {
-        [SerializeField, NodeGuid] private string _guid = Guid.NewGuid().ToString("N").Substring(0, 15);
+        [SerializeField, NodeGuid] private string _nodeGuid = Guid.NewGuid().ToString("N").Substring(0, 15);
 
-        public string GUID => _guid;
+        public string GUID => _nodeGuid;
 
         protected virtual void Awake()
         {
-            _guid = Guid.NewGuid().ToString("N").Substring(0, 15);
+            _nodeGuid = Guid.NewGuid().ToString("N").Substring(0, 15);
         }
 
         public virtual void Execute ()
