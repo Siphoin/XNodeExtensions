@@ -22,7 +22,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public event Action<BaseNode> OnNextNode;
 
         public bool IsPaused { get; private set; }
-        public IEnumerable<VaritableNode> Varitables => _varitables;
+        public IDictionary<string, VaritableNode> Varitables => _varitables;
 
         public void Execute ()
         {
