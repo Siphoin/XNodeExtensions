@@ -5,6 +5,7 @@ using SiphoinUnityHelpers.XNodeExtensions.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 #if UNITY_EDITOR
 #endif
 
@@ -50,6 +51,11 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public void SetValue(int index, T value)
         {
             _elements[index] = value;
+        }
+
+        public override object GetCurrentValue()
+        {
+            return _elements.ToArray();
         }
 
 
