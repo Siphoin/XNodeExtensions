@@ -25,6 +25,8 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public abstract void ResetValue();
 
+        public abstract object GetCurrentValue();
+
 #if UNITY_EDITOR
 
         protected virtual void Validate()
@@ -87,6 +89,11 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public void SetValue (T value)
         {
             _value = value;
+        }
+
+        public override object GetCurrentValue()
+        {
+            return _value;
         }
 
         public override void ResetValue()
