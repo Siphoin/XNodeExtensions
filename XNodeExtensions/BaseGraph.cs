@@ -52,7 +52,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         {
             if (_varitables is null)
             {
-                Dictionary<string, VaritableNode> nodes = new Dictionary<string, VaritableNode>;
+                Dictionary<string, VaritableNode> nodes = new Dictionary<string, VaritableNode>();
 
                 foreach (var node in this.nodes)
                 {
