@@ -1,6 +1,6 @@
 ﻿using XNode;
 using UnityEngine;
-using SiphoinUnityHelpers.Attributes;
+using SiphoinUnityHelpers.XNodeExtensions.Attributes;
 
 namespace SiphoinUnityHelpers.XNodeExtensions.UnityAPI.PlayerPrefsSystem
 {

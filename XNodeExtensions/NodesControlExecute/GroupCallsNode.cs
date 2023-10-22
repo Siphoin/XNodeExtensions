@@ -1,4 +1,4 @@
-﻿using SiphoinUnityHelpers.Attributes;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Attributes;
 using UnityEngine;
 
 namespace SiphoinUnityHelpers.XNodeExtensions.NodesControlExecutes

@@ -1,4 +1,4 @@
-﻿using SiphoinUnityHelpers.Attributes;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Attributes;
 using System;
 using System.Numerics;
 using Unity.VisualScripting;

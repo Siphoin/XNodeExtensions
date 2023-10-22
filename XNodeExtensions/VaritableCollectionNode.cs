@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using XNode;
-using SiphoinUnityHelpers.Attributes;
+using SiphoinUnityHelpers.XNodeExtensions.Attributes;
 using SiphoinUnityHelpers.XNodeExtensions.Extensions;
 using System.Linq;
 using System.Collections.Generic;
