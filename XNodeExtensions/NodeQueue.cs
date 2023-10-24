@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using SiphoinUnityHelpers.XNodeExtensions.AsyncNodes;
+using SiphoinUnityHelpers.XNodeExtensions.Debugging;
 using SiphoinUnityHelpers.XNodeExtensions.Exceptions;
 using SiphoinUnityHelpers.XNodeExtensions.Extensions;
 using System;
@@ -140,7 +141,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
                 stringBuilder.AppendLine(node.name);
             }
 
-            Debug.Log(stringBuilder.ToString());
+            XNodeExtensionsDebug.Log(stringBuilder.ToString());
         }
 
         private void OnExit(object sender, EventArgs e)
@@ -160,7 +161,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
             StopAsyncNodes();
 
-            Debug.Log($"node queue from graph {_graph.name} finished");
+            XNodeExtensionsDebug.Log($"node queue from graph {_graph.name} finished");
 
             OnEnd?.Invoke();
         }
@@ -180,7 +181,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
                 {
                     var asyncNode = node as AsyncNode;
 
-                    Debug.Log($"Wait node {asyncNode.name} GUID; {asyncNode.GUID}");
+                    XNodeExtensionsDebug.Log($"Wait node {asyncNode.name} GUID; {asyncNode.GUID}");
 
                     await XNodeExtensionsUniTask.WaitAsyncNode(asyncNode, _cancellationTokenSource);
                 }

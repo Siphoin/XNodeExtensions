@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Debugging;
+using UnityEngine;
 
 namespace SiphoinUnityHelpers.XNodeExtensions
 {
@@ -7,7 +8,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
     {
         public override void Execute()
         {
-            Debug.Log($"node queue from graph {graph.name} started");
+            XNodeExtensionsDebug.Log($"node queue from graph {graph.name} started");
         }
 
         

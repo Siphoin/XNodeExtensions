@@ -5,6 +5,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using SiphoinUnityHelpers.XNodeExtensions.Debugging;
 
 namespace SiphoinUnityHelpers.XNodeExtensions
 {
@@ -141,7 +142,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
             ResetVaritables();
 
-            Debug.Log($"graph {name} end execute");
+            XNodeExtensionsDebug.Log($"graph {name} end execute");
         }
 
         private void ResetVaritables()
