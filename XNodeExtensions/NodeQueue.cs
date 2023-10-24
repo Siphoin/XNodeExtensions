@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 namespace SiphoinUnityHelpers.XNodeExtensions
@@ -15,6 +16,8 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         private int _index;
 
         private StartNode _startNode;
+
+        private CancellationTokenSource _cancellationTokenSource;
 
         public event Action OnEnd;
 
@@ -30,7 +33,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public BaseNode Current => _nodes[_index];
 
-        public bool IsEnding => _index == Count;
+        public bool IsEnding => _index == Count || _cancellationTokenSource is null;
 
 
         public NodeQueue(BaseGraph parentGraph, IEnumerable<BaseNodeInteraction> nodes)
@@ -50,6 +53,8 @@ namespace SiphoinUnityHelpers.XNodeExtensions
             _asyncNodes = new List<AsyncNode>();
 
             _exitNodes = new List<ExitNode>();
+
+            _cancellationTokenSource = new CancellationTokenSource();
 
             _graph = parentGraph;
 
@@ -147,8 +152,12 @@ namespace SiphoinUnityHelpers.XNodeExtensions
             Exit();
         }
 
-        private void Exit()
+        public void Exit()
         {
+            _cancellationTokenSource?.Cancel();
+
+            _cancellationTokenSource = null;
+
             StopAsyncNodes();
 
             Debug.Log($"node queue from graph {_graph.name} finished");
@@ -163,7 +172,6 @@ namespace SiphoinUnityHelpers.XNodeExtensions
             var node = _nodes[currentIndex];
 
 
-
             if (node.Enabled)
             {
                 node.Execute();
@@ -174,7 +182,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
                     Debug.Log($"Wait node {asyncNode.name} GUID; {asyncNode.GUID}");
 
-                    await XNodeExtensionsUniTask.WaitAsyncNode(asyncNode);
+                    await XNodeExtensionsUniTask.WaitAsyncNode(asyncNode, _cancellationTokenSource);
                 }
 
 

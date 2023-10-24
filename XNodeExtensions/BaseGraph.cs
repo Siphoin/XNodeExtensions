@@ -15,20 +15,19 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         private IDictionary<string, VaritableNode> _varitables;
 
-        private CancellationTokenSource _cancellationTokenSource;
-
         public event Action OnEndExecute;
 
         public event Action<BaseNode> OnNextNode;
 
         public bool IsPaused { get; private set; }
+
+        public bool IsRunning => _queue is null ? false : !_queue.IsEnding;
+
         public IDictionary<string, VaritableNode> Varitables => _varitables;
 
         public void Execute ()
         {
             var queue = new List<BaseNodeInteraction>();
-
-            _cancellationTokenSource = new CancellationTokenSource();
 
             BuidVaritableNodes();
 
@@ -98,15 +97,9 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public void Stop ()
         {
-            _cancellationTokenSource.Cancel();
-
-            _queue = null;
-
-            _cancellationTokenSource = null;
-
             End();
 
-
+            _queue.Exit();
         }
 
         public BaseNode GetNodeByGuid (string guid)
@@ -126,18 +119,22 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         {
             _queue.OnEnd += End;
 
-            for (int i = 0; _queue.Count > i; i++)
+            while (!_queue.IsEnding)
             {
-               await UniTask.WaitUntil(() => !IsPaused, cancellationToken: _cancellationTokenSource.Token);
+                
+                await UniTask.WaitUntil(() => !IsPaused);
 
-               var node = await _queue.Next();
+                var node = await _queue.Next();
 
                 OnNextNode?.Invoke(node);
+
+               
             }
         }
 
         private void End()
         {
+
             _queue.OnEnd -= End;
 
             OnEndExecute?.Invoke();
