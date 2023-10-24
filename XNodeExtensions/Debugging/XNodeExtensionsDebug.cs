@@ -8,7 +8,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Debugging
     {
         private static readonly Dictionary<DebugType, string> _colorsDebug = new Dictionary<DebugType, string>()
         {
-            {DebugType.Message, "#7067d6" },
+            {DebugType.Message, "#69d667" },
             {DebugType.Error, "#d66767" },
             {DebugType.Warning, "#d6d267" }
         };
