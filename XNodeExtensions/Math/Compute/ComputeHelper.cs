@@ -1,8 +1,6 @@
-﻿
-using System;
-using UnityEngine;
+﻿using System;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
 {
     public static class ComputeHelper
     {
@@ -100,6 +98,19 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math
                         return firstString.Length >= secondString.Length;
                     }
                     break;
+            }
+
+            return false;
+        }
+
+        public static bool Compute(object a, object b, ComputeObjectsType type)
+        {
+            switch (type)
+            {
+                case ComputeObjectsType.Equals:
+                    return a == b;
+                case ComputeObjectsType.NotEquals:
+                    return a != b;
             }
 
             return false;

@@ -1,4 +1,4 @@
-﻿namespace SiphoinUnityHelpers.XNodeExtensions.Math
+﻿namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
 {
     public enum ComputeType
     {

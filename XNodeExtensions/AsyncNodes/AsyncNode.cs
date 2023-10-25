@@ -1,8 +1,9 @@
-﻿using System.Threading;
+﻿using SNEngine.AsyncNodes;
+using System.Threading;
 namespace SiphoinUnityHelpers.XNodeExtensions.AsyncNodes
 {
     [NodeTint("#5c572b")]
-    public abstract class AsyncNode : BaseNodeInteraction
+    public abstract class AsyncNode : BaseNodeInteraction, IIncludeWaitingNode
     {
 
         private CancellationTokenSource _tokenSource;

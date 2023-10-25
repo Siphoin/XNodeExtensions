@@ -3,6 +3,7 @@ using SiphoinUnityHelpers.XNodeExtensions.AsyncNodes;
 using SiphoinUnityHelpers.XNodeExtensions.Debugging;
 using SiphoinUnityHelpers.XNodeExtensions.Exceptions;
 using SiphoinUnityHelpers.XNodeExtensions.Extensions;
+using SNEngine.AsyncNodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         {
             Func<BaseNodeInteraction, bool> predicateFindStartNode = x => x is StartNode && x.Enabled && x.GetExitPort().Connection != null;
 
-            Func<BaseNodeInteraction, bool> predicateFindExitNode = x => x is ExitNode && x.Enabled && x.GetEnterPort().Connection != null;
+            Func<BaseNodeInteraction, bool> predicateFindExitNode = x => x is ExitNode && x.GetEnterPort().Connection != null;
 
             if (nodes.Count(predicateFindExitNode) == 0)
             {
@@ -177,11 +178,11 @@ namespace SiphoinUnityHelpers.XNodeExtensions
             {
                 node.Execute();
 
-                if (node is AsyncNode)
+                if (node is IIncludeWaitingNode)
                 {
-                    var asyncNode = node as AsyncNode;
+                    var asyncNode = node as IIncludeWaitingNode;
 
-                    XNodeExtensionsDebug.Log($"Wait node {asyncNode.name} GUID; {asyncNode.GUID}");
+                    XNodeExtensionsDebug.Log($"Wait node <b>{node.name}</b> GUID: <b>{node.GUID}</b>");
 
                     await XNodeExtensionsUniTask.WaitAsyncNode(asyncNode, _cancellationTokenSource);
                 }

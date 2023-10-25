@@ -1,4 +1,4 @@
-﻿using SiphoinUnityHelpers.XNodeExtensions.Math;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Math.Compute;
 using UnityEditor;
 using UnityEngine;
 

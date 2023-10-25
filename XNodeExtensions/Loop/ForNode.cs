@@ -1,5 +1,5 @@
-﻿using SiphoinUnityHelpers.XNodeExtensions.Math;
-using SiphoinUnityHelpers.XNodeExtensions.Math.Arifmetic;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Math.Arifmetic;
+using SiphoinUnityHelpers.XNodeExtensions.Math.Compute;
 using UnityEngine;
 using XNode;
 

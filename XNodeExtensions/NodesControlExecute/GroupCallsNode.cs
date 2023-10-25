@@ -1,5 +1,8 @@
-﻿using SiphoinUnityHelpers.XNodeExtensions.Attributes;
+﻿using Cysharp.Threading.Tasks;
+using SiphoinUnityHelpers.XNodeExtensions.Attributes;
+using System.Linq;
 using UnityEngine;
+using XNode;
 
 namespace SiphoinUnityHelpers.XNodeExtensions.NodesControlExecutes
 {
@@ -7,12 +10,28 @@ namespace SiphoinUnityHelpers.XNodeExtensions.NodesControlExecutes
     public class GroupCallsNode : NodeControlExecute
     {
         [SerializeField, ReadOnly(ReadOnlyMode.OnEditor)] private string _name;
+
+        [Output, SerializeField] private NodePort _operations;
         public override void Execute()
         {
-                foreach (var item in GetExitPort().GetConnections())
-                {
-                    ExecuteNodesFromPort(item);
-                }
+               var inputOperations = GetOutputPort(nameof(_operations));
+
+                ExecuteNodesFromPort(inputOperations).Forget();
+
+        }
+
+        public bool NodeContainsOnOperation (BaseNodeInteraction node)
+        {
+            var inputOperations = GetOutputPort(nameof(_operations));
+
+            var connections = inputOperations.GetConnections();
+
+            if (connections is null)
+            {
+                return false;
+            }
+
+            return connections.Contains(node.GetEnterPort());
         }
 
 #if UNITY_EDITOR

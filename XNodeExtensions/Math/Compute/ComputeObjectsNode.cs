@@ -1,21 +1,18 @@
-﻿using System.Data;
+﻿using System;
 using UnityEngine;
-using XNode;
+using Object = UnityEngine.Object;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
 {
-    [NodeTint("#3d6b6b")]
-    public class ComputeNode : BaseNode
+    public class ComputeObjectsNode : ComputeNode
     {
         [SerializeField, Input(ShowBackingValue.Never, ConnectionType.Override)] private Object _a;
 
         [SerializeField, Input(ShowBackingValue.Never, ConnectionType.Override)] private Object _b;
 
-        [SerializeField] private ComputeType _type;
+        [SerializeField] private ComputeObjectsType _type;
 
-        [SerializeField, Output(ShowBackingValue.Never)] private bool _result;
-
-        public override object GetValue(NodePort port)
+        protected override bool Compute()
         {
             var a = GetDataFromPort<object>(nameof(_a));
 
@@ -23,13 +20,10 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math
 
             if (a is null || b is null)
             {
-                return "a or b on compute is null";
+                throw new NullReferenceException($"any argument on Compute Objects Node (GUID: {GUID}) as null ");
             }
 
             return ComputeHelper.Compute(a, b, _type);
-
-
-
         }
     }
 }

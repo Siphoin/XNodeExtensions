@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using XNode;
 
 namespace SiphoinUnityHelpers.XNodeExtensions.NodesControlExecutes
@@ -21,18 +22,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.NodesControlExecutes
 
             NodePort targetPort = GetOutputPort(portName);
 
-            var connections = targetPort.GetConnections();
-
-
-            if (connections != null)
-            {
-                foreach (var item in connections)
-                {
-                    var node = item.node as BaseNode;
-
-                    node.Execute();
-                }
-            }
+            ExecuteNodesFromPort(targetPort).Forget();
         }
 
         public bool NodeContainsOnBranch (BaseNodeInteraction node)

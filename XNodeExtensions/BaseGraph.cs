@@ -122,7 +122,6 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
             while (!_queue.IsEnding)
             {
-                
                 await UniTask.WaitUntil(() => !IsPaused);
 
                 var node = await _queue.Next();
@@ -135,7 +134,6 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         private void End()
         {
-
             _queue.OnEnd -= End;
 
             OnEndExecute?.Invoke();

@@ -46,6 +46,19 @@ public class NodeControlExecuteFieldPropertyDrawer : PropertyDrawer
                 }
 
             }
+
+            if (connectedNode is GroupCallsNode)
+            {
+                var groupCallsNode = connectedNode as GroupCallsNode;
+
+                if (groupCallsNode.NodeContainsOnOperation(node))
+                {
+                    DrawLabel(position, label, node, connectedNode);
+
+                    return;
+                }
+
+            }
         }
         EditorGUI.PropertyField(position, property, label);
     }
