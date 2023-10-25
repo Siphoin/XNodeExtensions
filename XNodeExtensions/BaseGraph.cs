@@ -26,7 +26,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public IDictionary<string, VaritableNode> Varitables => _varitables;
 
-        public void Execute ()
+        public virtual void Execute ()
         {
             var queue = new List<BaseNodeInteraction>();
 
@@ -48,7 +48,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         }
 
-        private void BuidVaritableNodes()
+        protected void BuidVaritableNodes()
         {
             if (_varitables is null)
             {
