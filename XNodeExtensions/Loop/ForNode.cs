@@ -1,5 +1,5 @@
 ﻿using SiphoinUnityHelpers.XNodeExtensions.Math.Arifmetic;
-using SiphoinUnityHelpers.XNodeExtensions.Math.Compute;
+using SiphoinUnityHelpers.XNodeExtensions.Math.Compare;
 using UnityEngine;
 using XNode;
 
@@ -12,7 +12,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
 
         [Input, SerializeField] private int _startValue;
 
-        [SerializeField] private ComputeType _computeType = ComputeType.Equals;
+        [SerializeField] private CompareType _computeType = CompareType.Equals;
 
         [SerializeField] private ArifmeticType _arifmeticType = ArifmeticType.Increment;
 
@@ -43,7 +43,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
 
             switch (_computeType)
             {
-                case ComputeType.Equals:
+                case CompareType.Equals:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:
@@ -79,7 +79,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
                             break;
                     }
                     break;
-                case ComputeType.NotEquals:
+                case CompareType.NotEquals:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:
@@ -114,7 +114,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
                             break;
                     }
                     break;
-                case ComputeType.More:
+                case CompareType.More:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:
@@ -151,7 +151,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
                             break;
                     }
                     break;
-                case ComputeType.Lesser:
+                case CompareType.Lesser:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:
@@ -186,7 +186,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
                             break;
                     }
                     break;
-                case ComputeType.LesserOrEquals:
+                case CompareType.LesserOrEquals:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:
@@ -221,7 +221,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Loop
                             break;
                     }
                     break;
-                case ComputeType.MoreOrEquals:
+                case CompareType.MoreOrEquals:
                     switch (_arifmeticType)
                     {
                         case ArifmeticType.Increment:

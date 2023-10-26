@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compare
 {
-    public abstract class ComputeNumbersNode<T> : ComputeNode
+    public abstract class CompareNumbersNode<T> : CompareNode
     {
         [SerializeField, Input(connectionType = ConnectionType.Override)] private T _a;
 
         [SerializeField, Input(connectionType = ConnectionType.Override)] private T _b;
 
-        [SerializeField] private ComputeType _type;
+        [SerializeField] private CompareType _type;
 
         protected override bool Compute()
         {
@@ -30,7 +30,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
                 b = GetDataFromPort<T>(nameof(_b));
             }
 
-            return ComputeHelper.Compute(a, b, _type);
+            return CompareHelper.Compare(a, b, _type);
         }
 
     }

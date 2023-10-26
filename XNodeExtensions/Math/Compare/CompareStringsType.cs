@@ -1,6 +1,6 @@
-﻿namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
+﻿namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compare
 {
-    public enum ComputeType
+    public enum CompareStringsType
     {
         Equals,
         NotEquals,
@@ -8,6 +8,5 @@
         Lesser,
         LesserOrEquals,
         MoreOrEquals,
-        
     }
 }

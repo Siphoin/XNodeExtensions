@@ -2,15 +2,15 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compare
 {
-    public class ComputeObjectsNode : ComputeNode
+    public class CompareObjectsNode : CompareNode
     {
         [SerializeField, Input(ShowBackingValue.Never, ConnectionType.Override)] private Object _a;
 
         [SerializeField, Input(ShowBackingValue.Never, ConnectionType.Override)] private Object _b;
 
-        [SerializeField] private ComputeObjectsType _type;
+        [SerializeField] private CompareObjectsType _type;
 
         protected override bool Compute()
         {
@@ -23,7 +23,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
                 throw new NullReferenceException($"any argument on Compute Objects Node (GUID: {GUID}) as null ");
             }
 
-            return ComputeHelper.Compute(a, b, _type);
+            return CompareHelper.Compare(a, b, _type);
         }
     }
 }

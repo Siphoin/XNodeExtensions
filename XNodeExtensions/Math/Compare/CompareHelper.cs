@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compare
 {
-    public static class ComputeHelper
+    public static class CompareHelper
     {
 
 
@@ -16,7 +16,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
             return double.TryParse(first.ToString(), out numberFirst) && double.TryParse(second.ToString(), out numberSecond);
         }
 
-        public static bool Compute (object first, object second, ComputeType computeType)
+        public static bool Compare(object first, object second, CompareType computeType)
         {
             double numberFirst = double.NaN;
 
@@ -24,30 +24,21 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
 
             switch (computeType)
             {
-                case ComputeType.Equals:
+                case CompareType.Equals:
                     return first.Equals(second);
-                case ComputeType.NotEquals:
+                case CompareType.NotEquals:
                     return !first.Equals(second);
 
-                case ComputeType.More:
+                case CompareType.More:
 
                     if (TryParseComparingObjects(first, second, out numberFirst, out numberSecond))
                     {
                         return numberFirst > numberSecond;
                     }
 
-                    else if (first.GetType() == typeof(string) && second.GetType() == typeof(string))
-                    {
-                        string firstString = first.ToString();
-
-                        string secondString = second.ToString();
-
-                        return firstString.Length > secondString.Length;
-                    }
-
                     break;
 
-                case ComputeType.Lesser:
+                case CompareType.Lesser:
 
                     if (TryParseComparingObjects(first, second, out numberFirst, out numberSecond))
                     {
@@ -66,36 +57,18 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
                     break;
 
 
-                case ComputeType.LesserOrEquals:
+                case CompareType.LesserOrEquals:
 
                     if (TryParseComparingObjects(first, second, out numberFirst, out numberSecond))
                     {
                         return numberFirst <= numberSecond;
                     }
-
-                    else if (first.GetType() == typeof(string) && second.GetType() == typeof(string))
-                    {
-                        string firstString = first.ToString();
-
-                        string secondString = second.ToString();
-
-                        return firstString.Length <= secondString.Length;
-                    }
                     break;
-                case ComputeType.MoreOrEquals:
+                case CompareType.MoreOrEquals:
 
                     if (TryParseComparingObjects(first, second, out numberFirst, out numberSecond))
                     {
                         return numberFirst >= numberSecond;
-                    }
-
-                    else if (first.GetType() == typeof(string) && second.GetType() == typeof(string))
-                    {
-                        string firstString = first.ToString();
-
-                        string secondString = second.ToString();
-
-                        return firstString.Length >= secondString.Length;
                     }
                     break;
             }
@@ -103,13 +76,39 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
             return false;
         }
 
-        public static bool Compute(object a, object b, ComputeObjectsType type)
+        public static bool Compare(object a, object b, CompareObjectsType type)
         {
             switch (type)
             {
-                case ComputeObjectsType.Equals:
+                case CompareObjectsType.Equals:
                     return a == b;
-                case ComputeObjectsType.NotEquals:
+                case CompareObjectsType.NotEquals:
+                    return a != b;
+            }
+
+            return false;
+        }
+
+        public static bool Compare(bool a, bool b, CompareBoolsType type)
+        {
+            switch (type)
+            {
+                case CompareBoolsType.Equals:
+                    return a == b;
+                case CompareBoolsType.NotEquals:
+                    return a != b;
+            }
+
+            return false;
+        }
+
+        public static bool Compare(string a, string b, CompareStringsType type)
+        {
+            switch (type)
+            {
+                case CompareStringsType.Equals:
+                    return a == b;
+                case CompareStringsType.NotEquals:
                     return a != b;
             }
 

@@ -3,10 +3,10 @@ using System.Data;
 using UnityEngine;
 using XNode;
 
-namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compute
+namespace SiphoinUnityHelpers.XNodeExtensions.Math.Compare
 {
     [NodeTint("#3d6b6b")]
-    public abstract class ComputeNode : BaseNode
+    public abstract class CompareNode : BaseNode
     {
 
         [SerializeField, Output(ShowBackingValue.Never)] private bool _result;

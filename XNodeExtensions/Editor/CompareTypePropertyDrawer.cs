@@ -1,15 +1,15 @@
-﻿using SiphoinUnityHelpers.XNodeExtensions.Math.Compute;
+﻿using SiphoinUnityHelpers.XNodeExtensions.Math.Compare;
 using UnityEditor;
 using UnityEngine;
 
 namespace SiphoinUnityHelpers.XNodeExtensions.Editor
 {
-    [CustomPropertyDrawer(typeof(ComputeType))]
-    public class ComputeTypePropertyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(CompareType))]
+    public class CompareTypePropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            ComputeType computeType = (ComputeType)property.enumValueIndex;
+            CompareType compareType = (CompareType)property.enumValueIndex;
 
             string[] enumNames = new string[]
             {
@@ -21,9 +21,9 @@ namespace SiphoinUnityHelpers.XNodeExtensions.Editor
             ">="
             };
 
-            computeType = (ComputeType)EditorGUI.Popup(position, label.text, (int)computeType, enumNames);
+            compareType = (CompareType)EditorGUI.Popup(position, label.text, (int)compareType, enumNames);
 
-            property.enumValueIndex = (int)computeType;
+            property.enumValueIndex = (int)compareType;
         }
     }
 }
