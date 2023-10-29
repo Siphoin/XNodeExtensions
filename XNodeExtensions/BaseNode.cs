@@ -1,5 +1,6 @@
 ﻿using SiphoinUnityHelpers.Attributes;
 using SiphoinUnityHelpers.XNodeExtensions.Attributes;
+using SNEngine.AsyncNodes;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -62,6 +63,11 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public override object GetValue(NodePort port)
         {
             return null;
+        }
+
+        public override string ToString()
+        {
+            return $"{name} GUID: {GUID} Parent Graph {graph.name} Is Async? {this is IIncludeWaitingNode}";
         }
 #if UNITY_EDITOR
         protected string GetDefaultName()

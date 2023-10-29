@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using SiphoinUnityHelpers.XNodeExtensions.Debugging;
+using UnityEditor.Experimental.GraphView;
 
 namespace SiphoinUnityHelpers.XNodeExtensions
 {
@@ -98,9 +99,10 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public void Stop ()
         {
+
             End();
 
-            _queue.Exit();
+            _queue.Exit();       
         }
 
         public BaseNode GetNodeByGuid (string guid)
@@ -120,11 +122,18 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         {
             _queue.OnEnd += End;
 
-            while (!_queue.IsEnding)
+            for (int i = 0; i < _queue.Count; i++)
             {
                 await UniTask.WaitUntil(() => !IsPaused);
 
                 var node = await _queue.Next();
+
+                if (node is null)
+                {
+                    Debug.Log("666");
+
+                    break;
+                }
 
                 OnNextNode?.Invoke(node);
 

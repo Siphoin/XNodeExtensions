@@ -35,7 +35,7 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public BaseNode Current => _nodes[_index];
 
-        public bool IsEnding => _index == Count || _cancellationTokenSource is null;
+        public bool IsEnding => _index == Count;
 
 
         public NodeQueue(BaseGraph parentGraph, IEnumerable<BaseNodeInteraction> nodes)
@@ -156,11 +156,13 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public void Exit()
         {
+            _index = 0;
+
+            StopAsyncNodes();
+
             _cancellationTokenSource?.Cancel();
 
             _cancellationTokenSource = null;
-
-            StopAsyncNodes();
 
             XNodeExtensionsDebug.Log($"node queue from graph {_graph.name} finished");
 
