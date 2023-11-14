@@ -37,6 +37,8 @@ namespace SiphoinUnityHelpers.XNodeExtensions
 
         public bool IsEnding => _index == Count;
 
+        public IEnumerable<AsyncNode> AsyncNodes => _asyncNodes;
+        public IEnumerable<ExitNode> ExitNodes => _exitNodes;
 
         public NodeQueue(BaseGraph parentGraph, IEnumerable<BaseNodeInteraction> nodes)
         {

@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using System;
-using System.Threading;
 using SiphoinUnityHelpers.XNodeExtensions.Debugging;
-using UnityEditor.Experimental.GraphView;
 
 namespace SiphoinUnityHelpers.XNodeExtensions
 {
@@ -24,6 +22,8 @@ namespace SiphoinUnityHelpers.XNodeExtensions
         public bool IsPaused { get; private set; }
 
         public bool IsRunning => _queue is null ? false : !_queue.IsEnding;
+
+        protected NodeQueue Queue => _queue;
 
         public IDictionary<string, VaritableNode> Varitables => _varitables;
 
